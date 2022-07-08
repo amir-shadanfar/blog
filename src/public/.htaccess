@@ -1,0 +1,14 @@
+Options All -Indexes
+
+<Files .htaccess>
+    order allow,deny
+    deny from all
+</Files>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{SCRIPT_FILENAME} !-f
+    RewriteCond %{SCRIPT_FILENAME} !-d
+    RewriteCond %{SCRIPT_FILENAME} !-l
+    RewriteRule ^(.*)$ index.php/$1
+</IfModule>
