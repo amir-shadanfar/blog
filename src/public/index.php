@@ -6,6 +6,8 @@ require_once '../routes/web.php';
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Pecee\SimpleRouter\SimpleRouter;
 
+define('ROOT_PATH', $_SERVER['PWD']) ;
+define('PUBLIC_PATH', __DIR__) ;
 
 // Eloquent
 $capsule = new Capsule;
