@@ -2,30 +2,47 @@
 
 namespace App\Controllers;
 
+use App\Enum\DisplayMode;
+use App\Helpers\View;
+use App\Repository\BlogRepositoryInterface;
+
 class PageController
 {
-    public function __construct()
+    use View;
+
+    /**
+     * @param \App\Repository\BlogRepositoryInterface $blogRepository
+     */
+    public function __construct(protected BlogRepositoryInterface $blogRepository)
     {
 
     }
 
+    /**
+     * @return void
+     */
     public function home()
     {
-        echo 'home page';
+        $data = $this->blogRepository->all(['user', 'comments'], ['limit' => 3], DisplayMode::PAGINATE);
+        return $this->render(ROOT_PATH . '/templates/home.php', ['data' => $data]);
     }
 
-    public function blogs()
+    /**
+     * @param int $id
+     *
+     * @return void
+     */
+    public function blog_detail(int $id)
     {
-        echo 'blog page';
+        $data = $this->blogRepository->findById($id, ['*'], ['user', 'comments']);
+        return $this->render(ROOT_PATH . '/templates/blog_detail.php', ['data' => $data]);
     }
 
-    public function blog_detail()
-    {
-        echo 'blog detail';
-    }
-
+    /**
+     * @return void
+     */
     public function about()
     {
-        echo 'about';
+        return $this->render(ROOT_PATH . '/templates/about.php');
     }
 }
