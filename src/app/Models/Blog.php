@@ -22,4 +22,12 @@ class Blog extends Eloquent
     {
         return $this->hasOne(User::class, 'user_id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'user_id');
+    }
 }
