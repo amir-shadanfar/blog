@@ -36,6 +36,8 @@ services:
   mysql:
     container_name: blog_mysql
     image: 'mysql/mysql-server:8.0'
+    ports:
+      - '3333:3306'
     environment:
       MYSQL_ROOT_PASSWORD: 'password'
       MYSQL_ROOT_HOST: "%"
