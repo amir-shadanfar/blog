@@ -3,23 +3,22 @@
 namespace App\Controllers;
 
 use App\Enum\DisplayMode;
-use App\Helpers\View;
-use App\Repository\BlogRepositoryInterface;
+use App\Repositories\Eloquent\BlogRepositoryInterface;
+$container = require_once BOOTSTRAP_PATH . '/bootstrap.php';
 
-class PageController
+class PageController extends Controller
 {
-    use View;
 
     /**
-     * @param \App\Repository\BlogRepositoryInterface $blogRepository
+     * @param \App\Repositories\Eloquent\BlogRepository $blogRepository
      */
     public function __construct(protected BlogRepositoryInterface $blogRepository)
     {
-
     }
 
     /**
      * @return void
+     * @throws \Exception
      */
     public function home()
     {

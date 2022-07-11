@@ -2,17 +2,14 @@
 
 namespace App\Controllers;
 
-use App\Helpers\View;
-use App\Repository\BlogRepositoryInterface;
-use App\Repository\CommentRepositoryInterface;
+use App\Repositories\Eloquent\BlogRepositoryInterface;
+use App\Repositories\Eloquent\CommentRepositoryInterface;
 
-class ActionController
+class ActionController extends Controller
 {
-    use View;
-
     /**
-     * @param \App\Repository\BlogRepositoryInterface $blogRepository
-     * @param \App\Repository\CommentRepositoryInterface $commentRepository
+     * @param \App\Repositories\Eloquent\BlogRepositoryInterface $blogRepository
+     * @param \App\Repositories\Eloquent\CommentRepositoryInterface $commentRepository
      */
     public function __construct(
         protected BlogRepositoryInterface    $blogRepository,
