@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Repository;
+namespace App\Repositories;
 
 use App\Enum\DisplayMode;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
-interface RepositoryInterface
+interface BaseRepositoryInterface
 {
     /**
      * @param array $relations

@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Repository\Eloquent;
+namespace App\Repositories\Eloquent;
 
 use App\Models\Comment;
-use App\Repository\CommentRepositoryInterface;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use App\Repository\BaseRepository;
+use App\Repositories\BaseRepository;
 
 class CommentRepository extends BaseRepository implements CommentRepositoryInterface
 {

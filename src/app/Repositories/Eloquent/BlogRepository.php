@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Repository\Eloquent;
+namespace App\Repositories\Eloquent;
 
 use App\Models\Blog;
-use App\Repository\BlogRepositoryInterface;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use App\Repository\BaseRepository;
+use App\Repositories\BaseRepository;
 
 class BlogRepository extends BaseRepository implements BlogRepositoryInterface
 {

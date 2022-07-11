@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Repository;
+namespace App\Repositories\Eloquent;
 
+use App\Repositories\BaseRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 
-interface CommentRepositoryInterface extends RepositoryInterface
+interface CommentRepositoryInterface extends BaseRepositoryInterface
 {
 
 }

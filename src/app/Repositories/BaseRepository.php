@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Repository;
+namespace App\Repositories;
 
 use App\Enum\DisplayMode;
 use Illuminate\Database\Eloquent\Model;
 
-abstract class BaseRepository implements RepositoryInterface
+abstract class BaseRepository implements BaseRepositoryInterface
 {
 
     /**
