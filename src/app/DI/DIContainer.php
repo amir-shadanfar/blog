@@ -2,8 +2,6 @@
 
 namespace App\DI;
 
-use App\DI\Resolver;
-use App\DI\Singleton;
 use App\Exceptions\DependencyNotRegisteredException;
 use Psr\Container\ContainerInterface;
 

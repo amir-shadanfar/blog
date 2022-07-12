@@ -5,68 +5,33 @@ namespace App\DI;
 class Resolver
 {
     /**
-     * @param $class
+     * @param string $class
      *
-     * @return mixed|object|null
+     * @return object
      * @throws \ReflectionException
      */
-    public function resolve($class)
+    public function resolve(string $class): object
     {
-        $reflector = new \ReflectionClass($class);
+        $reflectionClass = new \ReflectionClass($class);
 
-        if (!$reflector->isInstantiable()) {
-            throw new \Exception("[$class] is not instantiable");
+        if (($constructor = $reflectionClass->getConstructor()) === null) {
+            return $reflectionClass->newInstance();
         }
 
-        $constructor = $reflector->getConstructor();
-
-        if (is_null($constructor)) {
-            return new $class;
+        if (($params = $constructor->getParameters()) === []) {
+            return $reflectionClass->newInstance();
         }
 
-        $parameters = $constructor->getParameters();
-        $dependencies = $this->getDependencies($parameters);
-
-        return $reflector->newInstanceArgs($dependencies);
-
-    }
-
-    /**
-     * @param $parameters
-     *
-     * @return array
-     * @throws \Exception
-     */
-    protected function getDependencies($parameters)
-    {
-        $dependencies = array();
-
-        foreach ($parameters as $parameter) {
-            $dependency = $parameter->getType();// getClass() is deprecated
-            // var_dump($parameter);
-            if (is_null($dependency)) {
-                $dependencies[] = $this->resolveNonClass($parameter);
-            } else {
-                $dependencies[] = $this->resolve($dependency->getName());
-            }
+        $newInstanceParams = [];
+        foreach ($params as $param) {
+            $newInstanceParams[] = $param->getType()->isBuiltin() ?
+                $param->getDefaultValue() :
+                $this->resolve($param->getType()->getName());
         }
 
-        return $dependencies;
-    }
-
-    /**
-     * @param \ReflectionParameter $parameter
-     *
-     * @return mixed
-     * @throws \Exception
-     */
-    protected function resolveNonClass(\ReflectionParameter $parameter)
-    {
-        if ($parameter->isDefaultValueAvailable()) {
-            return $parameter->getDefaultValue();
-        }
-
-        throw new \Exception("Erm.. Cannot resolve the unknown!?");
+        return $reflectionClass->newInstanceArgs(
+            $newInstanceParams
+        );
     }
 
 }
